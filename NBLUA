@@ -841,8 +841,37 @@ local function executeScript(
                         "落叶中心"
                 end
 
-                local source =
-                    game:HttpGet(url)
+                -- 优先使用执行器的 request 接口获取 BAL，失败后再回退到 HttpGet
+                local source
+
+                if scriptName == "BAL脚本" then
+                    local httpRequest =
+                        (syn and syn.request)
+                        or (http and http.request)
+                        or request
+                        or (http_request)
+
+                    if httpRequest then
+                        local response = httpRequest({
+                            Url = url,
+                            Method = "GET"
+                        })
+
+                        if response and response.Body then
+                            source = response.Body
+                        else
+                            error("BAL 请求成功但没有返回 Body")
+                        end
+                    else
+                        source = game:HttpGet(url)
+                    end
+                else
+                    source = game:HttpGet(url)
+                end
+
+                if not source or source == "" then
+                    error("获取脚本源码为空")
+                end
 
                 local func =
                     loadstring(source)
