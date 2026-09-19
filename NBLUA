@@ -771,11 +771,37 @@ center2Buttons[#center2Buttons + 1] = {
 }
 
 --------------------------------------------------
+-- 脚本中心2（其他）按钮：BAL脚本
+--------------------------------------------------
+
+local balBtn = Instance.new("TextButton")
+balBtn.Size = UDim2.new(0.8, 0, 0, buttonHeight)
+balBtn.Position = UDim2.new(0.1, 0, 0, 668)
+balBtn.BackgroundColor3 = Color3.fromRGB(170, 100, 220)
+balBtn.Text = "🟣 BAL脚本"
+balBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+balBtn.TextScaled = true
+balBtn.Font = Enum.Font.GothamSemibold
+balBtn.AutoButtonColor = true
+balBtn.ZIndex = 4
+balBtn.Parent = contentFrame
+
+local balCorner = Instance.new("UICorner")
+balCorner.CornerRadius = UDim.new(0, 8)
+balCorner.Parent = balBtn
+
+center2Buttons[#center2Buttons + 1] = {
+    btn = balBtn,
+    script = "https://api.jnkie.com/api/v1/luascripts/public/28f05f20579742b8db3901d189ca93ddecb4ff36815cee23d34bdff05ad7ae33/download",
+    name = "BAL脚本"
+}
+
+--------------------------------------------------
 -- 更新滚动区域高度
 --------------------------------------------------
 
 local contentHeight =
-    660
+    712
 
 
 contentFrame.Size =
@@ -1229,7 +1255,7 @@ local scriptsExpanded = true
 local scripts2Expanded = true
 
 local section1Height = 520
-local section2ExpandedHeight = 140
+local section2ExpandedHeight = 192
 local section2CollapsedHeight = 52
 
 local function updateSections()
@@ -1272,18 +1298,21 @@ local function updateSections()
     local linniY = section2Y + 96
     linniBtn.Position = UDim2.new(0.1, 0, 0, linniY)
 
+    local balY = section2Y + 148
+    balBtn.Position = UDim2.new(0.1, 0, 0, balY)
+
     -- 根据两个文件夹的状态重新计算内容高度
     local totalHeight
 
     if scriptsExpanded then
         if scripts2Expanded then
-            totalHeight = 660
+            totalHeight = 712
         else
             totalHeight = 616
         end
     else
         if scripts2Expanded then
-            totalHeight = 232
+            totalHeight = 284
         else
             totalHeight = 188
         end
