@@ -792,7 +792,7 @@ balCorner.Parent = balBtn
 
 center2Buttons[#center2Buttons + 1] = {
     btn = balBtn,
-    script = "https://api.jnkie.com/api/v1/luascripts/public/28f05f20579742b8db3901d189ca93ddecb4ff36815cee23d34bdff05ad7ae33/download",
+    script = "getgenv().SCRIPT_KEY = \"\"\nloadstring(game:HttpGet(\"https://api.jnkie.com/api/v1/luascripts/public/28f05f20579742b8db3901d189ca93ddecb4ff36815cee23d34bdff05ad7ae33/download\"))()",
     name = "BAL脚本"
 }
 
